@@ -8,6 +8,8 @@ except:
 class WebHigh(cmd.Cmd):
     info = "Welcome to the WebHigh administration console"
     prompt = "webhigh> "
+    credentials_set = False
+    node_set = False
     
     def do_enroll(self, args):
         print "Enroll called"
@@ -49,6 +51,11 @@ class WebHigh(cmd.Cmd):
         print "Starting AdminServer"
         wl.nmStart("AdminServer")
 
+    def default(self, line):
+        call = getattr(wl, line)
+        call()
+        return False
+        
     def emptyline(self):
         return True
             
