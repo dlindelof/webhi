@@ -1,0 +1,20 @@
+#!/bin/sh
+
+JYTHON=`which jython`
+WLS_HOME="/srv/wls/wlserver_10.3"
+if [ -e $WLS_HOME/server/bin/setWLSEnv.sh ]
+then
+    . $WLS_HOME/server/bin/setWLSEnv.sh
+else
+    echo "webhi: setWLSEnv.sh script not found."
+    return 1
+fi
+
+if [ -z $JYTHON ]
+then
+    echo "webhi: Jython not found."
+    return 1
+fi
+
+$JYTHON webhi.py
+
